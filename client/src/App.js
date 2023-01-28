@@ -3,7 +3,6 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import { useQuery } from 'react-query'
 import './App.css';
 import NotFound from "./pages/NotFound";
 import Navbar from "./component/Navbar";
@@ -12,16 +11,6 @@ import Signup from "./pages/Auth/Signup";
 import Products from "./pages/Products";
 
 function App() {
-  const { isLoading, error, data } = useQuery('repoData', () =>
-     fetch('https://api.github.com/repos/tannerlinsley/react-query').then(res =>
-       res.json()
-     )
-   )
- 
-   if (isLoading) return 'Loading...'
- 
-   if (error) return 'An error has occurred: ' + error.message
-   console.log("data",data)
   return (
     <Router>
       <div>
