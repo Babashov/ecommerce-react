@@ -50,3 +50,9 @@ export const fetchLogout = async ()=>{
 
     return data;
 }
+
+export const fetchOrder = async(values)=>{
+    const {data} = axios.post(`${process.env.REACT_APP_BASE_ENDPOINT}/order`,values)
+
+    return data;
+}

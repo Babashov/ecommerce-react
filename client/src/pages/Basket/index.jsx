@@ -1,9 +1,51 @@
-import { Alert, Box, Button, Image,Text } from '@chakra-ui/react'
+import { useRef,useState } from 'react'
+import { 
+    Alert, 
+    Box, 
+    Button, 
+    Image,
+    Text,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton, 
+    useDisclosure,
+    Textarea,
+    FormControl,
+    FormLabel
+} from '@chakra-ui/react'
+
 import { Link } from 'react-router-dom'
 import {useBasket} from '../../contexts/BasketContext'
+import { fetchOrder } from '../../api'
+
 function Basket() {
-    const {items,removeItem} = useBasket()
+    const {items,removeItem,emptyBasket} = useBasket()
     const total = items.reduce((acc,obj)=>acc+obj.price,0)
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const initialRef = useRef(null)
+    const finalRef = useRef(null)
+
+    const [address,setAddress] = useState('Ehmedli')
+
+    const handleSubmit = async ()=>{
+        const items_id = items.map((item)=>item._id)
+        
+        const input = {
+            items:JSON.stringify(items_id),
+            address
+        }
+
+        await fetchOrder(input)
+        emptyBasket()
+        onClose()
+    }
+
   return (
     <Box p={5}>
 
@@ -37,7 +79,37 @@ function Basket() {
 
                 <Box mt={10}>
                     <Text>Total : {total} AZN</Text>
+                    <Button mt={5} colorScheme='green' onClick={onOpen}>Order</Button>
                 </Box>
+
+
+
+                <Modal
+                    initialFocusRef={initialRef}
+                    finalFocusRef={finalRef}
+                    isOpen={isOpen}
+                    onClose={onClose}
+                >
+                    <ModalOverlay />
+                    <ModalContent>
+                    <ModalHeader>Order</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody pb={6}>
+                        <FormControl>
+                        <FormLabel>Address</FormLabel>
+                        <Textarea ref={initialRef} placeholder='Address' onChange={(e)=>setAddress(e.target.value)} />
+                        </FormControl>
+
+                    </ModalBody>
+
+                    <ModalFooter>
+                        <Button onClick={handleSubmit} type='submit' colorScheme='blue' mr={3}>
+                        Order
+                        </Button>
+                        <Button onClick={onClose}>Cancel</Button>
+                    </ModalFooter>
+                    </ModalContent>
+                </Modal>
 
             </>
         )}

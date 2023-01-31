@@ -30,11 +30,16 @@ export const BasketProvider = ({children})=>{
         setItems(filetered)
     }
 
+    const emptyBasket = ()=>{
+        setItems([])
+    }
+
     const values = {
         items,
         setItems,
         addToBasket,
-        removeItem
+        removeItem,
+        emptyBasket
     }
 
     return <BasketContext.Provider value={values}>{children}</BasketContext.Provider>
