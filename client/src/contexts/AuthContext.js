@@ -42,12 +42,6 @@ export const AuthProvider = ({children})=>{
         localStorage.removeItem('token')
         localStorage.removeItem('refreshToken')
 
-        if(data.message)
-        {
-            return window.location.href = '/'
-        }
-
-        
 
     }
 
