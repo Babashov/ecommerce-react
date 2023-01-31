@@ -37,7 +37,7 @@ export const AuthProvider = ({children})=>{
     const logout = async(cb)=>{
         setLoggedIn(false)
         setUser(null)
-        const data = await fetchLogout()
+        await fetchLogout()
 
         localStorage.removeItem('token')
         localStorage.removeItem('refreshToken')
