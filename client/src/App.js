@@ -9,10 +9,15 @@ import Navbar from "./component/Navbar";
 import Signin from "./pages/Auth/Signin";
 import Signup from "./pages/Auth/Signup";
 import Products from "./pages/Products";
+import AdminProducts from "./pages/Admin/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Profile from "./pages/Profile";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import Basket from "./pages/Basket";
+import Admin from "./pages/Admin";
+import AdminProtectedRoute from "./pages/AdminProtectedRoute";
+import Orders from "./pages/Admin/Orders";
+import Home from "./pages/Admin/Home";
 
 function App() {
   return (
@@ -30,7 +35,19 @@ function App() {
               <Route path='/profile' element={<Profile/>} />
             </Route>
 
-            <Route path="/basket" element={<Basket/>} />
+            <Route path="/admin" element={<AdminProtectedRoute/>}>
+              <Route path='/admin' element={<Admin/>}>
+                <Route index element={<Home/>}/>
+                <Route path="orders" element={<Orders/>}/>
+                <Route path="products" element={<AdminProducts/>}/>
+              </Route>
+              
+            </Route>
+
+            <Route path="/basket" element={<ProtectedRoute/>}>
+              <Route path="/basket" element={<Basket/>} />
+            </Route>
+            
             
             <Route path="/*" element={<NotFound/>} />
           </Routes>

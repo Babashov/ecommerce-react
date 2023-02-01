@@ -28,8 +28,9 @@ export const AuthProvider = ({children})=>{
     },[])
 
     const login = (data)=>{
+        
         setLoggedIn(true)
-        setUser(data)
+        setUser(data.user)
         localStorage.setItem('token',data.accessToken)
         localStorage.setItem('refreshToken',data.refreshToken)
     }
