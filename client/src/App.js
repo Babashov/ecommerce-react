@@ -36,6 +36,7 @@ function App() {
             </Route>
 
             <Route path="/admin" element={<AdminProtectedRoute/>}>
+              
               <Route path='/admin' element={<Admin/>}>
                 <Route index element={<Home/>}/>
                 <Route path="orders" element={<Orders/>}/>
