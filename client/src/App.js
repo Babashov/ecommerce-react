@@ -11,6 +11,7 @@ import Signup from "./pages/Auth/Signup";
 import Products from "./pages/Products";
 import AdminProducts from "./pages/Admin/Products";
 import AdminProductDetail from "./pages/Admin/ProductDetail";
+import AdminNewProduct from "./pages/Admin/Products/new";
 import ProductDetail from "./pages/ProductDetail";
 import Profile from "./pages/Profile";
 import ProtectedRoute from "./pages/ProtectedRoute";
@@ -43,6 +44,7 @@ function App() {
                 <Route path="orders" element={<Orders/>}/>
                 <Route path="products" element={<AdminProducts/>}/>
                 <Route path="products/:productId" element={<AdminProductDetail/>}/>
+                <Route path="products/new" element={<AdminNewProduct/>}/>
               </Route>
               
             </Route>
