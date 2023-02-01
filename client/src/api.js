@@ -66,3 +66,8 @@ export const deleteProduct = async (productId)=>{
     const {data} = await axios.delete(`${process.env.REACT_APP_BASE_ENDPOINT}/product/${productId}`)
     return data;
 }
+
+export const updateProduct = async(input,productId)=>{
+    const {data} = await axios.put(`${process.env.REACT_APP_BASE_ENDPOINT}/product/${productId}`,input)
+    return data;
+}
